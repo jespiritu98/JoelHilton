@@ -1,0 +1,51 @@
+﻿@{
+    ViewData["Title"] = "Movie Form";
+}
+
+@model JoelHilton.Models.MovieResponse
+
+<h1>Add your favorite Movie:</h1>
+
+<div>
+    <form method="post">
+        <label asp-for="Category">Category: </label>
+        <input asp-for="Category" required /><br />
+
+        <label asp-for="Title">Title: </label>
+        <input asp-for="Title" required/><br />
+
+        <label asp-for="Year">Year: </label>
+        <input asp-for="Year" / required><br />
+
+        <label asp-for="Director">Director: </label>
+        <input asp-for="Director" required /><br />
+
+        <label asp-for="Rating">Rating: </label>
+        <select asp-for="Rating" required>
+            <option>G</option>
+            <option>PG</option>
+            <option>PG-13</option>
+            <option>R</option>
+            <option>UR</option>
+            <option>NR</option>
+        </select><br />
+
+        <label asp-for="Edited">Edited: </label>
+        <select asp-for="Edited">
+            <option value="true">Yes</option>
+            <option value="false">No</option>
+        </select><br />
+
+        <label asp-for="LentTo">Lent to: </label>
+        <input asp-for="LentTo" /><br />
+
+        <label asp-for="Notes">Notes: </label>
+        <input asp-for="Notes" maxlength="25" /><br />
+
+        <button type="submit">Submit your Movie</button>
+
+
+    </form>
+
+    <link href="~/css/site.css" rel="stylesheet" />
+</div>
