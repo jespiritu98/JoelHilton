@@ -25,13 +25,14 @@ namespace JoelHilton.Controllers
         {
             return View();
         }
+       //Get and Post Methods for the Movie form, which takes them to the confirmation
         [HttpGet]
         public IActionResult MovieForm()
         {
             return View();
         }
         [HttpPost]
-        [ValidateAntiForgeryToken]
+       
         public IActionResult MovieForm(MovieResponse mr)
         {
                 

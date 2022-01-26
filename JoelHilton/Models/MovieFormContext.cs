@@ -11,14 +11,14 @@ namespace JoelHilton.Models
         //Constructor
         public MovieFormContext(DbContextOptions<MovieFormContext> options) : base(options)
         {
-            //Leave blank for now
+            //Leaving blank for now
         }
         public DbSet<MovieResponse> Responses { get; set; }
 
         protected override void OnModelCreating(ModelBuilder mb)
         {
             mb.Entity<MovieResponse>().HasData(
-                
+                //Adding my 3 movies to Database
                 new MovieResponse
                 {
                     ApplicationId = 1,
