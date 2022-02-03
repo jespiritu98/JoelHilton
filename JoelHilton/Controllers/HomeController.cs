@@ -1,24 +1,21 @@
 ﻿using JoelHilton.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace JoelHilton.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-        private MovieFormContext blahContext { get; set; }
+     
+        private MovieFormContext daContext { get; set; }
 
         //Controller
-        public HomeController(ILogger<HomeController> logger, MovieFormContext someName)
+        public HomeController(MovieFormContext someName)
         {
-            _logger = logger;
-            blahContext = someName;
+           
+            daContext = someName;
         }
 
         public IActionResult Index()
@@ -29,6 +26,7 @@ namespace JoelHilton.Controllers
         [HttpGet]
         public IActionResult MovieForm()
         {
+            ViewBag.Categories = daContext.Categories.ToList();
             return View();
         }
         [HttpPost]
@@ -36,10 +34,19 @@ namespace JoelHilton.Controllers
         public IActionResult MovieForm(MovieResponse mr)
         {
                 
-            blahContext.Add(mr);
-            blahContext.SaveChanges();
+            daContext.Add(mr);
+            daContext.SaveChanges();
             return View("Confirmation", mr);
                 
+        }
+        public IActionResult MovieList()
+        {
+            var movie = daContext.Responses
+                .Include(x => x.Category)
+                .OrderBy(x => x.Title)
+                .ToList();
+
+            return View(movie);
         }
         public IActionResult MyPodcasts()
         {

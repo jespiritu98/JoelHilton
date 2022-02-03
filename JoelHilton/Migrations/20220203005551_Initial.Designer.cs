@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JoelHilton.Migrations
 {
     [DbContext(typeof(MovieFormContext))]
-    [Migration("20220126164617_Initial")]
+    [Migration("20220203005551_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -17,14 +17,65 @@ namespace JoelHilton.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.1.22");
 
+            modelBuilder.Entity("JoelHilton.Models.Category", b =>
+                {
+                    b.Property<int>("CategoryId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("CategoryName")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("CategoryId");
+
+                    b.ToTable("Categories");
+
+                    b.HasData(
+                        new
+                        {
+                            CategoryId = 1,
+                            CategoryName = "Action/Adventure"
+                        },
+                        new
+                        {
+                            CategoryId = 2,
+                            CategoryName = "Comedy"
+                        },
+                        new
+                        {
+                            CategoryId = 3,
+                            CategoryName = "Drama"
+                        },
+                        new
+                        {
+                            CategoryId = 4,
+                            CategoryName = "Family"
+                        },
+                        new
+                        {
+                            CategoryId = 5,
+                            CategoryName = "Miscellaneous"
+                        },
+                        new
+                        {
+                            CategoryId = 6,
+                            CategoryName = "Television"
+                        },
+                        new
+                        {
+                            CategoryId = 7,
+                            CategoryName = "VHS"
+                        });
+                });
+
             modelBuilder.Entity("JoelHilton.Models.MovieResponse", b =>
                 {
                     b.Property<int>("ApplicationId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Category")
-                        .HasColumnType("TEXT");
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Director")
                         .HasColumnType("TEXT");
@@ -49,13 +100,15 @@ namespace JoelHilton.Migrations
 
                     b.HasKey("ApplicationId");
 
+                    b.HasIndex("CategoryId");
+
                     b.ToTable("Responses");
 
                     b.HasData(
                         new
                         {
                             ApplicationId = 1,
-                            Category = "Family",
+                            CategoryId = 4,
                             Director = "Ryan Little",
                             Edited = true,
                             LentTo = "",
@@ -67,7 +120,7 @@ namespace JoelHilton.Migrations
                         new
                         {
                             ApplicationId = 2,
-                            Category = "Family",
+                            CategoryId = 4,
                             Director = "Jared Bush",
                             Edited = false,
                             LentTo = "",
@@ -79,7 +132,7 @@ namespace JoelHilton.Migrations
                         new
                         {
                             ApplicationId = 3,
-                            Category = "Action/Adventure",
+                            CategoryId = 1,
                             Director = "Jon Watts",
                             Edited = false,
                             LentTo = "",
@@ -88,6 +141,15 @@ namespace JoelHilton.Migrations
                             Title = "Spiderman: No Way Home",
                             Year = "2021"
                         });
+                });
+
+            modelBuilder.Entity("JoelHilton.Models.MovieResponse", b =>
+                {
+                    b.HasOne("JoelHilton.Models.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

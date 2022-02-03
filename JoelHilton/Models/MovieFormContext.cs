@@ -14,15 +14,27 @@ namespace JoelHilton.Models
             //Leaving blank for now
         }
         public DbSet<MovieResponse> Responses { get; set; }
+        public DbSet<Category> Categories { get; set; }
+
+        //Seed data
 
         protected override void OnModelCreating(ModelBuilder mb)
         {
+            mb.Entity<Category>().HasData(
+                new Category { CategoryId = 1, CategoryName = "Action/Adventure" },
+                new Category { CategoryId = 2, CategoryName = "Comedy" },
+                new Category { CategoryId = 3, CategoryName = "Drama" },
+                new Category { CategoryId = 4, CategoryName = "Family" },
+                new Category { CategoryId = 5, CategoryName = "Miscellaneous" },
+                new Category { CategoryId = 6, CategoryName = "Television" },
+                new Category { CategoryId = 7, CategoryName = "VHS" }
+                );
+            
             mb.Entity<MovieResponse>().HasData(
-                //Adding my 3 movies to Database
                 new MovieResponse
                 {
                     ApplicationId = 1,
-                    Category = "Family",
+                    CategoryId = 4,
                     Title = "Forever Strong",
                     Year = "2008",
                     Director = "Ryan Little",
@@ -34,7 +46,7 @@ namespace JoelHilton.Models
                 new MovieResponse
                 {
                     ApplicationId = 2,
-                    Category = "Family",
+                    CategoryId = 4,
                     Title = "Encanto",
                     Year = "2021",
                     Director = "Jared Bush",
@@ -47,7 +59,7 @@ namespace JoelHilton.Models
                    new MovieResponse
                    {
                        ApplicationId = 3,
-                       Category = "Action/Adventure",
+                       CategoryId = 1,
                        Title = "Spiderman: No Way Home",
                        Year = "2021",
                        Director = "Jon Watts",

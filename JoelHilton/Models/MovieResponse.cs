@@ -13,7 +13,6 @@ namespace JoelHilton.Models
         [Required]
         public int ApplicationId { get; set; }
        
-        public string Category { get; set; }
     
         public string Title { get; set; }
        
@@ -26,5 +25,10 @@ namespace JoelHilton.Models
         public string LentTo { get; set; }
      
         public string Notes { get; set; }
+
+        //Build Foreign Key Relationship
+        public int CategoryId { get; set; }
+        public Category Category { get; set; }
+
     }
 }
