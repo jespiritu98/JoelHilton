@@ -8,6 +8,9 @@
 @*Form to add users movie*@
 <div>
     <form method="post">
+
+        <div asp-validation-summary="All"></div>
+
         <label asp-for="CategoryId">Category: </label>
         <select asp-for="CategoryId">
             <option value="">Select a Category</option>
@@ -18,16 +21,16 @@
         </select><br />
 
         <label asp-for="Title">Title: </label>
-        <input asp-for="Title" required /><br />
+        <input asp-for="Title" /><br />
 
         <label asp-for="Year">Year: </label>
-        <input asp-for="Year" / required><br />
+        <input asp-for="Year" /><br />
 
         <label asp-for="Director">Director: </label>
-        <input asp-for="Director" required /><br />
+        <input asp-for="Director" /><br />
 
         <label asp-for="Rating">Rating: </label>
-        <select asp-for="Rating" required>
+        <select asp-for="Rating">
             <option>G</option>
             <option>PG</option>
             <option>PG-13</option>
@@ -46,7 +49,8 @@
         <input asp-for="LentTo" /><br />
 
         <label asp-for="Notes">Notes: </label>
-        <input asp-for="Notes" maxlength="25" /><br />
+        <input asp-for="Notes" /><br />
+
 
         <button type="submit">Submit your Movie</button>
 
